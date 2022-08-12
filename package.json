@@ -1,7 +1,7 @@
 {
-  "name": "vite-plugin-http2",
-  "version": "1.0.11",
-  "description": "a vite plugin to solve http2 and proxy conflict",
+  "name": "vite-plugin-http2-ws",
+  "version": "1.0.12",
+  "description": "a vite plugin to solve http2 and proxy conflict, with websocket support. Only tested with vite3.",
   "main": "dist/index.js",
   "scripts": {
     "dev": "rimraf dist && rollup -c -w",
@@ -10,18 +10,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:strongcode9527/vite-plugin-http2.git"
+    "url": "git@github.com:YujiaCheng1996/vite-plugin-http2.git"
   },
   "engines": {
     "node": ">=12.2.0"
   },
   "keywords": [
+    "websocket",
     "http2",
     "proxy",
     "vite",
     "plugin"
   ],
-  "author": "strong9527",
+  "author": "YujiaCheng1996",
   "license": "ISC",
   "dependencies": {
     "devcert": "^1.2.2",
@@ -34,6 +35,6 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.67.2",
     "typescript": "^4.5.5",
-    "vite": "^2.8.3"
+    "vite": "^3.0.0"
   }
 }
