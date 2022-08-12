@@ -94,7 +94,9 @@ export default (options?: OptionsTypes): Plugin => {
                   typeof proxyOptions === "object"
                     ? { ...proxyOptions, ws: undefined }
                     : proxyOptions,
-                  (err) => console.error(err)
+                  (err) => {
+                    if (err.code !== "ECONNRESET") console.error(err);
+                  }
                 );
                 return;
               }
