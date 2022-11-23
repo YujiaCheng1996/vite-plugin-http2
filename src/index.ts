@@ -5,12 +5,13 @@ const devcert = require("devcert");
 const http2Proxy = require("http2-proxy");
 
 type OptionsTypes = {
-  proxy?: ({ [key: string]: http1WebOptions } & { ws?: boolean }) | undefined;
+  proxy?: ({ [key: string]: http1WebOptions } & { ws?: boolean; }) | undefined;
   certificateDomain?: string | string[] | undefined;
   ssl?: {
     key: string;
     cert: string;
   };
+  timeout?: number;
 };
 
 export default (options?: OptionsTypes): Plugin => {
@@ -71,7 +72,7 @@ export default (options?: OptionsTypes): Plugin => {
                 req,
                 res,
                 typeof proxyOptions === "object"
-                  ? { ...proxyOptions, ws: undefined }
+                  ? { ...proxyOptions, ws: undefined, proxyTimeout: options.timeout }
                   : proxyOptions,
                 (err) => err && next(err)
               );
@@ -92,10 +93,15 @@ export default (options?: OptionsTypes): Plugin => {
                   socket,
                   head,
                   typeof proxyOptions === "object"
-                    ? { ...proxyOptions, ws: undefined }
+                    ? { ...proxyOptions, ws: undefined, proxyTimeout: options.timeout }
                     : proxyOptions,
                   (err) => {
-                    if (err.code !== "ECONNRESET") console.error(err);
+                    if (
+                      err &&
+                      err.code !== "ECONNRESET" &&
+                      err.code !== "ECONNABORTED"
+                    )
+                      console.error(err);
                   }
                 );
                 return;

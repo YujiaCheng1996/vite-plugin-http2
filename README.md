@@ -42,6 +42,8 @@ export default {
         key: "",
         cert: "",
       },
+      // 超时时间，不填则为node环境http_request默认超时时间
+      timeout: 1000,
     }),
   ],
 };
@@ -52,6 +54,7 @@ export default {
 | proxy             | proxy [http2-proxy options](https://github.com/nxtedition/node-http2-proxy#options)         | -             |
 | certificateDomain | [HTTPS certificate domain name](https://github.com/davewasmer/devcert#multiple-domains-san) | ['localhost'] |
 | ssl               | if devcert create certificate fail，you can pass your ssl option                            | -             |
+| timeout           | timeout specification                                                                       | -             |
 
 使用过程中 https 证书创建失败，或出现诡异问题，可使用此命令清除证书创建的缓存。
 

@@ -37,7 +37,9 @@ export default {
             ssl: {
                 key: '',
                 cert: '',
-            }
+            },
+            // https://nodejs.org/api/http.html#http_http_request_options_callback
+            timeout: 1000,
         }),
     ]
 };
@@ -49,6 +51,7 @@ export default {
 | proxy             | proxy [http2-proxy options](https://github.com/nxtedition/node-http2-proxy#options)         | -             |
 | certificateDomain | [HTTPS certificate domain name](https://github.com/davewasmer/devcert#multiple-domains-san) | ['localhost'] |
 | ssl               | if devcert create certificate fail，you can pass your ssl option                            | -             |
+| timeout           | timeout specification                                                                       | -             |
 
 HTTPS Certificate creation fails or has strange problems during use. You can use this command to clear the cache of Certificate creation.
 
