@@ -8,8 +8,8 @@
     "useUnknownInCatchVariables": false,
     "declarationDir": "dist",
     "declaration": true,
-    "target": "ES2019",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "ESNext",
     "lib": [
       "ESNext",
       "dom"

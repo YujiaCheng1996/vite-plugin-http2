@@ -6,6 +6,8 @@ forked from [strongcode9527/vite-plugin-http2](https://github.com/strongcode9527
 
 vite-plugin-http2 is a vite plugin to solve [the option "proxy" and "http2" conflict.](https://github.com/vitejs/vite/issues/484)
 
+suport http2 and websocket proxy
+
 this plugin can solve the following difficulties:
 
 - The HTTPS certificate will be automatically generated for you and the configuration will be automatically modified
@@ -29,9 +31,12 @@ export default {
                     async onReq(req, options) {
                         options.path = `/prefix/${options.path}`;
                     }
-                    // set ws to true when necessary.
-                    ws: true,
-                }
+                },
+                 '^/ws/connect/': {
+                     ws: true, // support websocket proxy
+                     hostname: 'xxx.com',
+                     protocol: 'http or https',
+                 },
             },
             // if devcert create certificate fail，you can pass your ssl option
             ssl: {

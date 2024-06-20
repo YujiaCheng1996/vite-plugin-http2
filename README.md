@@ -8,7 +8,11 @@ fork 自 [strongcode9527/vite-plugin-http2](https://github.com/strongcode9527/vi
 
 vite-plugin-http2-ws 是一个 vite 插件，是为了解决 [vite 无法同时开启 proxy 代理以及 http2 的问题](https://github.com/vitejs/vite/issues/484)
 
-这个插件可以解决一下难题
+支持正常 http2 以及 websocket 转发
+
+改用esm打包，支持vite新版本
+
+这个插件可以解决以下难题
 
 - 使用 devcert 库自动生成 https 证书，并且自动配置在系统内部（第一次进入开发环境，需要输入密码将证书放入系统指定目录）
 - 使用 http2-proxy 进行代理转发。
@@ -33,8 +37,11 @@ export default {
             // 如果路径需要修改，可以在这里修改添加
             options.path = `/prefix/${options.path}`;
           },
-          // 指明需要ws代理
-          ws: true,
+        },
+        '^/ws/connect/': {
+            ws: true, // support websocket proxy
+            hostname: 'xxx.com',
+            protocol: 'http or https',
         },
       },
       // 如果 https 证书创建失败，可以自己创建，并在这里传入
