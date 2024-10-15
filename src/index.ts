@@ -1,8 +1,8 @@
 import type { Plugin } from 'vite';
 import type { http1WebOptions, wsHttp1Options } from 'http2-proxy';
 import * as Http2 from 'http2';
-const devcert = require("devcert");
 
+const { mkcert } = require('@deskbtm/dev-mkcert');
 const http2Proxy = require("http2-proxy");
 
 type OptionsTypes = {
@@ -32,14 +32,14 @@ export default (options?: OptionsTypes): Plugin => {
                     }
                 }
             }
-            let ssl: Awaited<ReturnType<typeof devcert.certificateFor>>;
-            // 生成证书必须包含 localhost 所以做一下处理
+            let ssl: Awaited<ReturnType<typeof mkcert>>;
 
             try {
-                ssl = await devcert.certificateFor(options?.certificateDomain || 'localhost');
+               ssl = await mkcert();
             } catch (err) {
                 console.error('vite-plugin-http2-ws', err);
             }
+            
             if (ssl && ssl.cert.toString() && ssl.key.toString()) {
                 return {
                     server: {
@@ -54,7 +54,7 @@ export default (options?: OptionsTypes): Plugin => {
                     }
                 };
             }
-            console.warn('[vite-plugin-http2-ws]: sorry, devcert create certificate fail, you can pass ssl option to create http2 server');
+            console.warn('[vite-plugin-http2-ws]: sorry, mkcert create certificate fail, you can pass ssl option to create http2 server');
             return {};
         },
         configureServer: async (server) => {

@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-http2-ws",
-  "version": "1.0.15",
-  "description": "a vite plugin to solve http2 and proxy conflict, with websocket support. Only tested with vite3.",
+  "version": "1.0.16",
+  "description": "a vite plugin to solve http2 and proxy conflict, with websocket support. Support up to at least vite5.",
   "main": "dist/index.mjs",
   "module": "dist/index.mjs",
   "scripts": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:YujiaCheng1996/vite-plugin-http2.git"
+    "url": "git+ssh://git@github.com/YujiaCheng1996/vite-plugin-http2.git"
   },
   "engines": {
     "node": ">=12.2.0"
@@ -26,16 +26,16 @@
   "author": "YujiaCheng1996",
   "license": "ISC",
   "dependencies": {
-    "devcert": "^1.2.2",
+    "@deskbtm/dev-mkcert": "^1.17.5",
     "http2-proxy": "^5.0.53"
   },
   "devDependencies": {
     "@rollup/plugin-esm-shim": "^0.1.7",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "rimraf": "^5.0.7",
-    "rollup": "^4.18.0",
-    "typescript": "^5.4.5",
-    "vite": "^5.3.1"
+    "@rollup/plugin-typescript": "^12.1.0",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.24.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.9"
   },
   "type": "module"
 }

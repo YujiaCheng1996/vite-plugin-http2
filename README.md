@@ -10,11 +10,11 @@ vite-plugin-http2-ws 是一个 vite 插件，是为了解决 [vite 无法同时�
 
 支持正常 http2 以及 websocket 转发
 
-改用esm打包，支持vite新版本
+改用esm打包，支持vite新版本，换用mkcert，支持node最新版本，并无需指定域名
 
 这个插件可以解决以下难题
 
-- 使用 devcert 库自动生成 https 证书，并且自动配置在系统内部（第一次进入开发环境，需要输入密码将证书放入系统指定目录）
+- 使用 mkcert 库自动生成 https 证书，并且自动配置在系统内部（第一次进入开发环境，需要输入密码将证书放入系统指定目录）
 - 使用 http2-proxy 进行代理转发。
 - 有限支持 websocket，仅 log error 不能处理。
 
@@ -26,8 +26,6 @@ import http2 from "vite-plugin-http2-ws";
 export default {
   plugins: [
     http2({
-      // 如果你的开发环境只是用 localhost 开发，这个配置项可以忽略
-      certificateDomain: ["my-test.xxx.com"],
       proxy: {
         // 创建正则表达式的字符串，这里识别需要代理的接口
         "^/api": {
@@ -59,17 +57,9 @@ export default {
 | key               | desc                                                                                        | default       |
 | ----------------- | ------------------------------------------------------------------------------------------- | ------------- |
 | proxy             | proxy [http2-proxy options](https://github.com/nxtedition/node-http2-proxy#options)         | -             |
-| certificateDomain | [HTTPS certificate domain name](https://github.com/davewasmer/devcert#multiple-domains-san) | ['localhost'] |
-| ssl               | if devcert create certificate fail，you can pass your ssl option                            | -             |
+| ssl               | if mkcert create certificate fail，you can pass your ssl option                            | -             |
 | timeout           | timeout specification                                                                       | -             |
 
 使用过程中 https 证书创建失败，或出现诡异问题，可使用此命令清除证书创建的缓存。
 
 重启开发环境后，便可重新创建 https 证书。
-
-```
-// mac
-
-rm -rf ~/Library/"Application Support"/devcert/
-
-```
